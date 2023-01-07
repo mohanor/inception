@@ -4,8 +4,10 @@ RUN apt-get update -y
 RUN apt-get install mariadb-server -y
 
 
+RUN mysql -u root < matef.sql
+
 RUN service mysql start
 
-CMD ["/usr/bin/mysqld_safe"]
+CMD ["mysqld_safe"]
 
 
