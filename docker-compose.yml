@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    container_name: mydbcontainer
+    image: mydb
+    restart: always
+    build: ./mariadb/
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    # environment:
+    #   - name=value
+  # nginx:
+  #   build : ./nginx
+  #   ports:
+  #     - 80:80
+
