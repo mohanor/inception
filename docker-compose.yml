@@ -1,19 +1,37 @@
 version: '3'
 
 services:
+  wp:
+    image: word
+    container_name: word
+    ports:
+      - 9000:9000
+    build: ./wordpress
+    volumes:
+      - wordpress:/var/www/html
+
   db:
-    container_name: mydbcontainer
-    image: mydb
+    container_name: maria_container
+    image: maria_image
     restart: always
     build: ./mariadb/
     ports:
-      - 3000:3000
+      - 3306:3306
     env_file:
       - .env
-    # environment:
-    #   - name=value
-  # nginx:
-  #   build : ./nginx
-  #   ports:
-  #     - 80:80
+  
+  nginx:
+    image: nginx_image
+    container_name: nginx_container
+    build : ./nginx
+    depends_on:
+      - wp
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+  
+
+volumes:
+  wordpress:
 

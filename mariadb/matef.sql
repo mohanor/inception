@@ -2,6 +2,6 @@ CREATE DATABASE IF NOT EXISTS  wp_inception;
 
 CREATE USER IF NOT EXISTS'matef'@'%' IDENTIFIED BY '123';
 
-GRANT ALL PRIVILEGES  ON wordpress.* TO 'matef'@'%';
+GRANT ALL PRIVILEGES  ON wp_inception.* TO 'matef'@'%';
 
 FLUSH PRIVILEGES;
