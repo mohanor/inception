@@ -1,18 +1,6 @@
 #!/bin/bash
 
 
-while :
-do
-	echo "Press [CTRL+C] to stop.."
-	sleep 1
-done
-
-# mkdir /var/www/
-# mkdir /var/www/html
-
-# cd /var/www/html
-
-# rm -rf *
 
 # curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar 
 
@@ -42,3 +30,15 @@ done
 # mkdir /run/php
 
 # /usr/sbin/php-fpm7.3 -F
+
+
+
+# cd /var/www/html
+
+
+sed -i "23s/db_name/$DB_NAME/" /wp-config.php
+sed -i "26s/user_name/$DB_USER/" /wp-config.php
+sed -i "29s/pwd/$DB_PASSWORD/" /wp-config.php
+sed -i "32s/host_name/$DB_HOST/" /wp-config.php
+
+cp wp-config /var/www/html

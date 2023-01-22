@@ -9,20 +9,30 @@ services:
     build: ./wordpress
     volumes:
       - wordpress:/var/www/html
+    networks:
+      - wp
+    depends_on:
+      - db
+    env_file:
+      - .env
 
   db:
-    container_name: maria_container
-    image: maria_image
+    container_name: maria
+    image: maria
     restart: always
     build: ./mariadb/
     ports:
       - 3306:3306
     env_file:
       - .env
+    volumes:
+      - db:/var/www/html
+    networks:
+      - wp
   
   nginx:
-    image: nginx_image
-    container_name: nginx_container
+    image: nginx
+    container_name: nginx
     build : ./nginx
     depends_on:
       - wp
@@ -30,8 +40,23 @@ services:
       - 443:443
     volumes:
       - wordpress:/var/www/html
-  
+    networks:
+      - wp
 
 volumes:
   wordpress:
+    driver: local
+    driver_opts:
+      device: /Users/matef/Desktop/wordpress
+      o: bind
+      type: none
+  db:
+    driver: local
+    driver_opts:
+      device: /Users/matef/Desktop/db
+      o: bind
+      type: none
 
+networks:
+  wp:
+    
