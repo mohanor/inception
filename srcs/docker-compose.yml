@@ -6,7 +6,7 @@ services:
     container_name: word
     ports:
       - 9000:9000
-    build: ./wordpress
+    build: ./requirements/wordpress
     volumes:
       - wordpress:/var/www/html
     networks:
@@ -20,7 +20,7 @@ services:
     container_name: maria
     image: maria
     restart: always
-    build: ./mariadb/
+    build: ./requirements/mariadb/
     ports:
       - 3306:3306
     env_file:
@@ -33,7 +33,7 @@ services:
   nginx:
     image: nginx
     container_name: nginx
-    build : ./nginx
+    build : ./requirements/nginx
     depends_on:
       - wp
     ports:
@@ -59,4 +59,4 @@ volumes:
 
 networks:
   wp:
-    
+    # name: matef => version problem (upgrade)  

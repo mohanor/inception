@@ -1,6 +1,6 @@
 
 up:
-	docker-compose up -d
+	docker-compose -f ./srcs/docker-compose.yml up -d
 
 r:
 	docker rm -f  $$(docker ps -aq)
