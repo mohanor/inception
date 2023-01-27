@@ -1,62 +1,62 @@
-version: '3'
+version: '3.6'
 
 services:
-  wp:
-    image: word
+  wordpress:
+    image: wordpress:13.37
     container_name: word
     ports:
-      - 9000:9000
+      - 9000
     build: ./requirements/wordpress
     volumes:
       - wordpress:/var/www/html
     networks:
-      - wp
+      - inception
     depends_on:
-      - db
+      - mariadb
     env_file:
       - .env
 
-  db:
+  mariadb:
     container_name: maria
-    image: maria
+    image: mariadb:13.37
     restart: always
     build: ./requirements/mariadb/
     ports:
-      - 3306:3306
+      - 3306
     env_file:
       - .env
     volumes:
-      - db:/var/www/html
+      - db:/var/lib/mysql
     networks:
-      - wp
-  
+      - inception
+
   nginx:
-    image: nginx
+    image: nginx:13.37
     container_name: nginx
     build : ./requirements/nginx
     depends_on:
-      - wp
+      - wordpress
     ports:
       - 443:443
     volumes:
       - wordpress:/var/www/html
     networks:
-      - wp
+      - inception
 
 volumes:
   wordpress:
     driver: local
     driver_opts:
-      device: /Users/matef/Desktop/wordpress
+      device: /home/matef/data/WordPress
       o: bind
       type: none
   db:
     driver: local
     driver_opts:
-      device: /Users/matef/Desktop/db
+      device: /home/matef/data/DB
       o: bind
       type: none
 
 networks:
-  wp:
-    # name: matef => version problem (upgrade)  
+  inception:
+    name: inception

@@ -1,13 +1,10 @@
 FROM debian:buster
 
-
+RUN apt-get update -y && apt-get upgrade -y
 RUN mkdir -p /var/www/html
-RUN apt update -y
 
-RUN apt install php-fpm php-mysql -y
-RUN apt install curl -y
-RUN apt install wget -y
-RUN apt install curl -y
+RUN apt-get install php-fpm php-mysql -y
+RUN apt-get install wget -y && apt-get install curl -y
 RUN apt-get install php7.3-fpm -y
 RUN service php7.3-fpm start
 
@@ -17,7 +14,3 @@ COPY ./tools/script.sh /
 RUN chmod 777 /script.sh
 
 CMD ["/script.sh"]
-
-
-# ENTRYPOINT [ "/script.sh" ]
-# CMD ["/usr/sbin/php-fpm7.3","--nodaemonize"]
