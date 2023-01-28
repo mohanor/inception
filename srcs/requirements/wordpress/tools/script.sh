@@ -2,7 +2,7 @@
 
 
 
-if [ -f /var/www/html/wp.config.php ]; then
+if [ ! -f /var/www/html/wp.config.php ]; then
 
 cd /var/www/html
 wget http://wordpress.org/latest.tar.gz
@@ -27,4 +27,5 @@ wp user create $WP_AUTHOR $WP_AUTHOR_EMAIL --role=author --user_pass=$WP_AUTHOR_
 fi
 
 /usr/sbin/php-fpm7.3 -F
+
 exec "$@"

@@ -2,27 +2,23 @@ version: '3.6'
 
 services:
   wordpress:
-    image: wordpress:13.37
-    container_name: word
-    ports:
-      - 9000
+    image: wordpress:1337
+    container_name: wordpress
     build: ./requirements/wordpress
     volumes:
       - wordpress:/var/www/html
-    networks:
-      - inception
     depends_on:
       - mariadb
     env_file:
       - .env
+    networks:
+      - inception
 
   mariadb:
-    container_name: maria
-    image: mariadb:13.37
+    container_name: mariadb
+    image: mariadb:1337
     restart: always
     build: ./requirements/mariadb/
-    ports:
-      - 3306
     env_file:
       - .env
     volumes:
@@ -31,7 +27,7 @@ services:
       - inception
 
   nginx:
-    image: nginx:13.37
+    image: nginx:1337
     container_name: nginx
     build : ./requirements/nginx
     depends_on:
@@ -46,12 +42,14 @@ services:
 volumes:
   wordpress:
     driver: local
+    name: wordpress
     driver_opts:
       device: /home/matef/data/WordPress
       o: bind
       type: none
   db:
     driver: local
+    name: mariadb
     driver_opts:
       device: /home/matef/data/DB
       o: bind
