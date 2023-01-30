@@ -30,7 +30,7 @@ make build
 make start
 ```
 
-5. Access WordPress in your browser at https://localhost (in my case : matef.42.fr)
+5. Access WordPress in your browser at https://localhost (Don't forget to change the DOMAIN_NAME in the .env file)
 
 ## Configuration
 
